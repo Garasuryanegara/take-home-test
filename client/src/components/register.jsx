@@ -2,8 +2,11 @@ import { useState } from "react";
 import pabrik from "../assets/factory.jpg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Icon, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
 
 export default function Register() {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [user, setUser] = useState({
     fullname: "",
     username: "",
@@ -30,39 +33,57 @@ export default function Register() {
               <div className="text-xl font-bold">Register</div>
               <div>
                 <label>Full Name</label>
-                <input
-                  className=" rounded-sm h-[30px] w-4/5 border border-gray-600 p-1"
-                  onChange={(e) => {
-                    setUser({ ...user, fullname: e.target.value });
-                  }}
-                />
+                <div className="w-[260px]">
+                  <Input
+                    className=" rounded-sm h-[30px] w-4/5 border border-gray-600 p-1"
+                    onChange={(e) => {
+                      setUser({ ...user, fullname: e.target.value });
+                    }}
+                  />
+                </div>
               </div>
               <div>
                 <label>Username</label>
-                <input
-                  className=" rounded-sm h-[30px] w-4/5 border border-gray-600 p-1"
-                  onChange={(e) => {
-                    setUser({ ...user, username: e.target.value });
-                  }}
-                />
+                <div className="w-[260px]">
+                  <Input
+                    className=" rounded-sm h-[30px] w-4/5 border border-gray-600 p-1"
+                    onChange={(e) => {
+                      setUser({ ...user, username: e.target.value });
+                    }}
+                  />
+                </div>
               </div>
               <div className="flex flex-col">
                 <label>Email</label>
-                <input
-                  className=" rounded-sm h-[30px] w-4/5 border border-gray-600 p-1"
-                  onChange={(e) => {
-                    setUser({ ...user, email: e.target.value });
-                  }}
-                />
+                <div className="w-[260px]">
+                  <Input
+                    className=" rounded-sm h-[30px] w-4/5 border border-gray-600 p-1"
+                    onChange={(e) => {
+                      setUser({ ...user, email: e.target.value });
+                    }}
+                  />
+                </div>
               </div>
               <div>
                 <label>Password</label>
-                <input
-                  className=" rounded-sm h-[30px] w-4/5 border border-gray-600 p-1"
-                  onChange={(e) => {
-                    setUser({ ...user, password: e.target.value });
-                  }}
-                />
+                <div className="w-[260px]">
+                  <InputGroup>
+                    <Input
+                      type={isPasswordVisible ? "text" : "password"}
+                      className=" rounded-sm h-[30px] w-4/5 border border-gray-600 p-1"
+                      onChange={(e) => {
+                        setUser({ ...user, password: e.target.value });
+                      }}
+                    />
+                    <InputRightElement>
+                      <Icon
+                        cursor={"pointer"}
+                        as={isPasswordVisible ? FaEye : FaEyeSlash}
+                        onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+                      ></Icon>
+                    </InputRightElement>
+                  </InputGroup>
+                </div>
               </div>
               <div>
                 <button

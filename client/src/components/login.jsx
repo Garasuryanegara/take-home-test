@@ -2,8 +2,11 @@ import { useNavigate } from "react-router-dom";
 import pabrik from "../assets/factory.jpg";
 import { useState } from "react";
 import axios from "axios";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
+import { Icon, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 
 export default function Login() {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [user, setUser] = useState({
     usermail: "",
     password: "",
@@ -33,21 +36,35 @@ export default function Login() {
 
               <div>
                 <label>Email or Username</label>
-                <input
-                  className=" rounded-sm h-[30px] w-4/5 border border-gray-600 p-1"
-                  onChange={(e) => {
-                    setUser({ ...user, usermail: e.target.value });
-                  }}
-                />
+                <div className="w-[260px]">
+                  <Input
+                    className=" rounded-sm h-[30px] w-4/5 border border-gray-600 p-1"
+                    onChange={(e) => {
+                      setUser({ ...user, usermail: e.target.value });
+                    }}
+                  />
+                </div>
               </div>
               <div>
                 <label>Password</label>
-                <input
-                  className=" rounded-sm h-[30px] w-4/5 border border-gray-600 p-1"
-                  onChange={(e) => {
-                    setUser({ ...user, password: e.target.value });
-                  }}
-                />
+                <div className="w-[260px]">
+                  <InputGroup>
+                    <Input
+                      type={isPasswordVisible ? "text" : "password"}
+                      className="rounded-sm h-[30px] w-4/5 border border-gray-600 p-1 bg-transparent"
+                      onChange={(e) => {
+                        setUser({ ...user, password: e.target.value });
+                      }}
+                    />
+                    <InputRightElement>
+                      <Icon
+                        cursor={"pointer"}
+                        as={isPasswordVisible ? FaEye : FaEyeSlash}
+                        onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+                      ></Icon>
+                    </InputRightElement>
+                  </InputGroup>
+                </div>
               </div>
               <div>
                 <button
@@ -56,6 +73,7 @@ export default function Login() {
                 >
                   Login
                 </button>
+
                 <div className="text-xs pt-2">
                   Don't have an account?{" "}
                   <span
